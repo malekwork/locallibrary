@@ -29,6 +29,11 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        return ', '.join([genre.name for genre in self.genre.all()[:3]])
+
+    display_genre.short_description = 'Genre'
+
 
 class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID")
@@ -54,7 +59,7 @@ class BookInstance(models.Model):
         ordering = ["due_back"]
 
     def __str__(self):
-        return '%s (%s)' % self.idself.book.title
+        return '%s' % self.book.title
 
 
 class Author(models.Model):
