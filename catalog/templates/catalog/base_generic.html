@@ -27,13 +27,12 @@
                     <li><a href="{% url 'author_list' %}">All authors</a></li>
                     {% if user.is_authenticated %}
                         <li>User: {{ user.get_username }}</li>
-                        <form id="lgo" method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                        </form>
-                        <li><a  href="#?next={{ request.path }}" onclick="document.getElementById('lgo').submit();">Logout</a></li>
-
+                         <form id="lgo" method="post" action="{% url 'logout' %}?next={{ request.path }}">
+                                {% csrf_token %}
+                         </form>
+                        <li><a href="#?next={{ request.path }}" onclick="document.getElementById('lgo').submit();" >Logout</a></li>
                     {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
                     {% endif %}
                 </ul>
             {% endblock %}
