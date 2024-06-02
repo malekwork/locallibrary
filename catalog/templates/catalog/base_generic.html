@@ -27,6 +27,7 @@
                     <li><a href="{% url 'author_list' %}">All authors</a></li>
                     {% if user.is_authenticated %}
                         <li>User: {{ user.get_username }}</li>
+                        <li><a href="{% url 'my-borrowed' %}">My Borrowed</a></li>
                          <form id="lgo" method="post" action="{% url 'logout' %}?next={{ request.path }}">
                                 {% csrf_token %}
                          </form>
